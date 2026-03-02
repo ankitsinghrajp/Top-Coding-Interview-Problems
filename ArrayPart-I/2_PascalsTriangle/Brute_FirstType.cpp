@@ -1,32 +1,26 @@
 #include<iostream>
 using namespace std;
 
-int factorial(int n){
-     int fact = 1;
-     for(int i = 1;i<=n;i++){
-        fact *= i;
-     }
-     return fact;
-}
-
-int nCr(int r, int c){
-    int numerator = factorial(r-1);
-    int denominator = factorial(c-1) * factorial(r-c);
-    
-    int result = numerator/denominator;
-    return result;
+int nCr(int n, int r){
+    int res = 1;
+    for(int i = 0;i<r;i++){
+        res = res * (n-i);
+        res = res/(i+1);
+    }
+    return res;
 }
 int main(){
 
     int r;
     int c;
+
     cout<<"Enter the row number: ";
     cin>>r;
     cout<<"Enter the column number: ";
-    cin>>c;
+    cin>> c;
 
-    cout<<"The element at row "<<r<<" and column "<<c<<" is: "<<nCr(r,c);
-
+    cout<<"The element at row: "<<r<<" and column "<<c<<" is: "<<nCr(r-1,c-1);
+    
 
     return 0;
 }
