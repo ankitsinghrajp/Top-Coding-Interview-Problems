@@ -16,18 +16,21 @@ void printArray(vector<vector<int>> arr){
 vector<vector<int>> fourSum(vector<int> arr, int target){
    set<vector<int>> st;
    for(int i = 0;i<arr.size();i++){
-    for(int j = i+1;j<arr.size();j++){
+      for(int j = i+1;j<arr.size();j++){
+        set<int> HashMap;
         for(int k = j+1;k<arr.size();k++){
-            for(int l = k+1;l<arr.size();l++){
-                int sum = arr[i] + arr[j] + arr[k] + arr[l];
-                if(sum == target){
-                    vector<int> result = {arr[i],arr[j],arr[k],arr[l]};
-                    sort(result.begin(),result.end());
-                    st.insert(result);
-                }
+            long long sum = arr[i] + arr[j] + arr[k];
+            long long fourth = (long long) target - sum;
+            if(fourth >= INT32_MIN && fourth <= INT32_MAX && HashMap.find(fourth)!= HashMap.end()){
+                vector<int> result = {arr[i],arr[j],arr[k],(int)fourth};
+                sort(result.begin(),result.end());
+                st.insert(result);
+            }
+            else{
+                HashMap.insert(arr[k]);
             }
         }
-    }
+      }
    }
    vector<vector<int>> ans(st.begin(),st.end());
    return ans;
