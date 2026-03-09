@@ -14,9 +14,9 @@ int lenOfLongest(string &s){
         }
        }
 
-       Hash[s[second++]] = 1;
-       
-       longest = max(longest,second-first);
+       Hash[s[second]] = 1;
+       longest = max(longest,second-first+1);
+       second ++;
    }
    return longest;
 }
