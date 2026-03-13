@@ -17,39 +17,30 @@ void printLinkedList(Node* Head){
 };
 
 Node* removeNthNode(Node* Head, int N){
-    Node* temp = Head;
-    int count = 0;
-    while(temp != nullptr){
-        temp = temp->next;
-        count += 1;
-    }
+   Node* slow = Head;
+   Node* fast = Head;
+   
+   for(int i = 0;i<N;i++){
+       fast = fast->next;
+   }
 
-    int nthNodePrev = count - N;
-
-    if(nthNodePrev == 0){
-        Node* deleteNode = Head;
-        Head = Head->next;
-        delete deleteNode;
-        return Head;
-    }
-
-    temp = Head;
-    while(nthNodePrev != 1){
-          temp = temp->next;
-          nthNodePrev -= 1;
-    }
-
-    Node* deleteNode = temp->next;
-    
-    if(temp->next != nullptr){
-        temp->next = temp->next->next;
-    }
-    else{
-        temp->next = nullptr;
-    }
-
-    delete deleteNode;
+   if(fast == nullptr){
+    Node* delNode = Head;
+    Head = Head->next;
+    delete delNode;
     return Head;
+   }
+  
+ 
+   while(fast->next != nullptr){
+    slow = slow->next;
+    fast = fast->next;
+   }
+
+    Node* delNode = slow->next;
+        slow->next = slow->next->next;
+        delete delNode;
+   return Head;
 }
 
 int main(){
