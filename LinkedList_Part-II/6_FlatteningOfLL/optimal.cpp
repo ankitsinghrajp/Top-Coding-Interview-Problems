@@ -25,37 +25,36 @@ ListNode* printLinkedList(ListNode* head){
     cout<<endl;
 }
 
-ListNode* convert(vector<int> arr){
-
-    if(arr.size() == 0) return NULL;
-
-   ListNode* head = new ListNode(arr[0]);
-   ListNode* temp = head;
-
-   for(int i = 1;i<arr.size();i++){
-        ListNode* newNode = new ListNode(arr[i]);
-        temp->child = newNode;
-        temp = newNode;
-   }
-   return head;
-}
-
-ListNode* Flatten(ListNode* head){
-    ListNode* temp = head;
-    vector<int> arr;
-    while(temp != nullptr){
-        ListNode* temp2 = temp;
-        while(temp2 != nullptr){
-             arr.push_back(temp2->val);
-             temp2 = temp2->child;
+ListNode* merge(ListNode* list1, ListNode* list2){
+    ListNode* dummyNode = new ListNode(-1);
+    
+    ListNode* temp = dummyNode;
+    while(list1 != nullptr && list2 != nullptr){
+        if(list1->val <= list2->val){
+            temp->child = list1;
+            temp = list1;
+            list1 = list1->child;
         }
-        temp = temp->next;
+        else{
+            temp->child = list2;
+            temp = list2;
+            list2 = list2->child;
+        }
+        temp->next = nullptr;
     }
 
-    sort(arr.begin(),arr.end());
+    if(list1) temp->child = list1;
+    else temp->child = list2;
 
-    ListNode* newHead = convert(arr);
-   return newHead;
+    return dummyNode->child;
+}
+ListNode* Flatten(ListNode* head){
+   if(head == NULL || head->next == NULL){
+    return head;
+   }
+
+   ListNode* mergedHead = Flatten(head->next);
+   return merge(head,mergedHead);
 }
 int main(){
 
