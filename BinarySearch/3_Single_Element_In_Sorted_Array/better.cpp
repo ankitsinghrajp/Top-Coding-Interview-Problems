@@ -2,17 +2,12 @@
 #include<vector>
 using namespace std;
 int singleElement(vector<int> &arr){
-   if(arr.size() == 0) return arr[0];
-
-   for(int i = 0;i<arr.size();i++){
-     int count = 0;
-     for(int j = 0;j<arr.size();j++){
-        if(arr[i] == arr[j]) count ++;
-     }
-
-     if(count == 1) return arr[i];
+   if(arr.size() == 1) return arr[0];
+   
+   for(int i = 0;i<arr.size()-1; i+= 2){
+     if(arr[i] != arr[i+1]) return arr[i];
    }
-   return -1;
+   return arr.back();
 }
 int main(){
     vector<int> arr = {1,1,2,3,3,4,4,5,5,6,6};
