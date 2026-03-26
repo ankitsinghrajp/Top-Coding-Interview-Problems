@@ -16,6 +16,7 @@ void printArray(vector<vector<int>> arr){
 vector<vector<int>> fourSum(vector<int> arr, int target){
     vector<vector<int>> ans;
     sort(arr.begin(),arr.end());
+    sort(arr.begin(),arr.end());
     for(int i = 0;i<arr.size();i++){
           if(i>0 && arr[i]== arr[i-1]) continue;
 
