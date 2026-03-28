@@ -9,7 +9,7 @@ class Stack{
     void push(int x){
       q.push(x);
       int s = q.size();
-      for(int i=0;i<s-1;i++){
+      for(int i=1;i<s;i++){
           q.push(q.front());
           q.pop();
       }
