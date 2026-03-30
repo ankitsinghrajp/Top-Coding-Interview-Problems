@@ -11,17 +11,25 @@ void printStack(stack<int> st){
     }
     cout<<endl;
 }
-
-void sortStack(stack<int> &st){
-    vector<int> arr;
-    while(!st.empty()){
-        arr.push_back(st.top());
-        st.pop();
-    }
-    sort(arr.begin(),arr.end());
-   for(int i = 0;i<arr.size();i++){
-      st.push(arr[i]);
+void insertSorted(stack<int> &st, int element){
+   if(st.empty() || st.top() <= element){
+      st.push(element);
+      return;
    }
+
+   int temp = st.top();
+   st.pop();
+   insertSorted(st,element);
+   st.push(temp);
+}
+void sortStack(stack<int> &st){
+   if(st.empty()) return;
+
+   int x = st.top();
+   st.pop();
+
+   sortStack(st);
+   insertSorted(st,x);
 }
 int main(){
     stack<int> st;
