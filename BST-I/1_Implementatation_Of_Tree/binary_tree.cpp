@@ -1,59 +1,79 @@
-#include<iostream>
-#include<vector>
-#include<queue>
+#include <iostream>
+#include <queue>
 using namespace std;
+class Node
+{
+public:
+    int data;
+    Node *left;
+    Node *right;
 
-class Node{
-    public:
-      int val;
-      Node* left;
-      Node* right;
-
-    Node(int v){
-        val = v;
+    Node(int value)
+    {
+        data = value;
         left = NULL;
         right = NULL;
     }
 };
 
-Node*  BinaryTree(){
-     int x;
-    cout<<"Enter the root element: ";
-    cin>>x;
-    int first;
-    int second;
-    queue<Node*> q;
+class BinaryTree
+{
+public:
+    Node *create()
+    {
+        int x;
+        int left;
+        int right;
+        cout << "Enter the root element value: ";
+        cin >> x;
+        queue<Node *> q;
+        Node *root = new Node(x);
+        q.push(root);
 
-    Node* root = new Node(x);
-    q.push(root);
-    while(!q.empty()){
-         Node* temp = q.front();
-         q.pop();
+        while (!q.empty())
+        {
+            Node *temp = q.front();
+            q.pop();
 
-         cout<<"Enter the left child of "<<temp->val<<": ";
-         cin>>first;
-         if(first != -1){
-            Node* newNode = new Node(first);
-            temp ->left = newNode;
-            q.push(newNode);
-         }
+            cout << "Enter the left child of " << temp->data << ": ";
+            cin >> left;
 
-         cout<<"Enter the right child of "<<temp->val<<": ";
-         cin>>second;
+            if (left != -1)
+            {
+                Node *newNode = new Node(left);
+                temp->left = newNode;
+                q.push(temp->left);
+            }
 
-         if(second != -1){
-            Node* newNode = new Node(second);
-            temp->right = newNode;
-            q.push(newNode);
-         }
+            cout << "Enter the right child of " << temp->data << ": ";
+            cin >> right;
+
+            if (right != -1)
+            {
+                Node *newNode = new Node(right);
+                temp->right = newNode;
+                q.push(temp->right);
+            }
+        }
+
+        return root;
     }
-   return root;
-}
-int main(){
-    Node* root = BinaryTree();
+};
+int main()
+{
 
-    cout<<"The root Node is: "<<root->val<<endl;
-    cout<<"The left child of the root is: "<<root->left->val<<endl;
-    cout<<"The right child of the root is: "<<root->right->val<<endl;
+    BinaryTree b1;
+    Node *root = b1.create();
+
+    if (root->left != NULL)
+        cout << "The left child of root is: " << root->left->data << endl;
+    else
+        cout << "No left child" << endl;
+
+    if (root->right != NULL)
+        cout << "The right child of root is: " << root->right->data << endl;
+    else
+        cout << "No right child" << endl;
+
     return 0;
 }
