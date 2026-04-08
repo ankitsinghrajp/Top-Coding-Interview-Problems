@@ -30,14 +30,12 @@ class BinaryTree{
         }
 };
 
-void PreOrder(Node* root){
-
+void PreOrder(Node * root){
     if(root == NULL) return;
 
     cout<<root->data<<" ";
     PreOrder(root->left);
     PreOrder(root->right);
-
 }
 int main(){
     
