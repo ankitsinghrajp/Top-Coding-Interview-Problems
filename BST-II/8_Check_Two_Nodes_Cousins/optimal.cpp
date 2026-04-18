@@ -66,11 +66,11 @@ class binaryTree{
                 q.pop();
 
                 if(temp->data == x){
-                    l1 == level;
+                    l1 = level;
                 }
                 
                 if(temp->data == y){
-                    l2 == level;
+                    l2 = level;
                 }
 
                 if(temp->left){
